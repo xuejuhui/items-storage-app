@@ -1,6 +1,7 @@
 const initialState = {
     items: [],
     loading:false,
+    isEditing: false,
   };
 
 const reducer = (state=initialState, action) =>{
@@ -32,6 +33,11 @@ const reducer = (state=initialState, action) =>{
         return{
             ...state,
             loading:action.payload
+        }
+        case 'EDIT':
+        return{
+            ...state,
+            isEditing:action.payload
         }
         default:
         return newState

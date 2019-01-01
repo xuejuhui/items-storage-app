@@ -1,27 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { FormGroup, ControlLabel, FormControl, Button } from "react-bootstrap";
-import { connect } from 'react-redux';
-import { handleSubmit } from '../actions/postsAction'
+import { connect } from "react-redux";
+import { handleSubmit } from "../actions/postsAction";
 
 class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
       item: {
-        id : null,
+        id: null,
         title: "",
         description: ""
       }
     };
   }
-  shouldComponentUpdate(nextProps, nextState){
-    if(nextState.item!==this.state.item){
-      return true
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.item !== this.state.item) {
+      return true;
     }
-    if(nextProps.handleSubmit!==this.props.handleSubmit){
-      return true
+    if (nextProps.handleSubmit !== this.props.handleSubmit) {
+      return true;
     }
-    return false
+    return false;
   }
   handleTitleChange = e => {
     this.setState({
@@ -42,46 +42,52 @@ class Form extends Component {
   render() {
     return (
       <div>
-      <form onSubmit={(e)=>{
-        e.preventDefault() 
-        this.props.handleSubmit(this.state.item)
-        this.setState({item:{
-          id:null,
-          title:'',
-          description:''
-        }})
-        console.log(this.state.item)
-        }}>
-        <ControlLabel>Title</ControlLabel>
-        <FormControl
-          name="title"
-          type="text"
-          label="Text"
-          placeholder="Enter text"
-          value={this.state.item.title}
-          onChange={this.handleTitleChange}
-        />
-        <FormGroup>
-          <ControlLabel>Description</ControlLabel>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            this.props.handleSubmit(this.state.item);
+            this.setState({
+              item: {
+                id: null,
+                title: "",
+                description: ""
+              }
+            });
+            console.log(this.state.item);
+          }}
+        >
+          <ControlLabel>Title</ControlLabel>
           <FormControl
-            componentClass="textarea"
-            placeholder="textarea"
-            name="description"
-            value={this.state.item.description}
-            onChange={this.handleDescriptionChange}
+            name="title"
+            type="text"
+            label="Text"
+            placeholder="Enter text"
+            value={this.state.item.title}
+            onChange={this.handleTitleChange}
           />
-        </FormGroup>
-        <Button type="submit">Submit</Button>
-      </form>
-    </div>
-    )
+          <FormGroup>
+            <ControlLabel>Description</ControlLabel>
+            <FormControl
+              componentClass="textarea"
+              placeholder="textarea"
+              name="description"
+              value={this.state.item.description}
+              onChange={this.handleDescriptionChange}
+            />
+          </FormGroup>
+          <Button type="submit">Submit</Button>
+        </form>
+      </div>
+    );
   }
 }
 // const mapDispatchToProps = (dispatch)=>{
-//   return { 
+//   return {
 //     handleSubmit:(item)=> dispatch(handleSubmit(item))
 //   }
 // }
 
-
-export default connect(null,{ handleSubmit })(Form)
+export default connect(
+  null,
+  { handleSubmit }
+)(Form);
