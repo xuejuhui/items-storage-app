@@ -23,6 +23,9 @@ class Form extends Component {
     }
     return false;
   }
+  componentWillReceiveProps(nextProps){
+    this.setState({item: nextProps.editToDo});
+  }
   handleTitleChange = e => {
     this.setState({
       item: {
@@ -53,7 +56,6 @@ class Form extends Component {
                 description: ""
               }
             });
-            console.log(this.state.item);
           }}
         >
           <ControlLabel>Title</ControlLabel>
@@ -86,8 +88,14 @@ class Form extends Component {
 //     handleSubmit:(item)=> dispatch(handleSubmit(item))
 //   }
 // }
+function mapStateToProps(state, ownProps) {  
+  console.log(state)
+  return {
+    editToDo: state.editToDo,
+  }
+}
 
 export default connect(
-  null,
+  mapStateToProps,
   { handleSubmit }
 )(Form);

@@ -2,6 +2,7 @@ const initialState = {
     items: [],
     loading:false,
     isEditing: false,
+    editToDo:{},
   };
 
 const reducer = (state=initialState, action) =>{
@@ -38,6 +39,11 @@ const reducer = (state=initialState, action) =>{
         return{
             ...state,
             isEditing:action.payload
+        }
+        case 'VALUE':
+        return{
+            ...state,
+            editToDo:action.payload
         }
         default:
         return newState

@@ -6,29 +6,29 @@ import { handleUpdate } from '../actions/postsAction'
 
 const Display = (props) => {
   const { items, loading, handleUpdateForm, handleDel, isEditing } = props
-  console.log(items, loading)
+  console.log(props.editTodo)
   if (isEditing) {
     return (
       <div>
         {items.map((item) => {
-          console.log(item)
+
           return (
             <div key={item._id}>
               <h2>{item.title}</h2>
               <p>{item.description}</p>
               <button onClick={() => handleDel(item._id)}>Del</button>
               <button onClick={() => handleUpdateForm(item._id)}>Edit</button>
-              <Form />
+
             </div>
           )
         })}
+        <Form editTodo={props.editTodo}/>
       </div>
     )
   }
   return (
     <div>
       {items.map((item) => {
-        console.log(item)
         return (
           <div key={item._id}>
             <h2>{item.title}</h2>
