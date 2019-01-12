@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Form from "./Form.js";
 import NavBar from "./NavBar.js";
 import Display from "./Display.js";
-import { handleUpdate, handleUpdateValue } from '../actions/postsAction'
+import { handleUpdate, handleUpdateValue, handleDel } from '../actions/postsAction'
 
 class Layout extends Component {
   constructor(props, context) {
@@ -17,11 +17,14 @@ class Layout extends Component {
 
   };
   render() {
+    const { items } = this.props
     return (
       <div>
         <NavBar />
         <Form />
-        <Display handleUpdateForm = {this.handleUpdateForm} isEditing = {this.state.isEditing}/>
+        {items.map((item)=>{
+          return       <div key={item._id}> <Display handleUpdateForm = {this.handleUpdateForm} isEditing = {this.state.isEditing} handleDel={this.props.handleDel} item={item}/>      </div>
+        })}
       </div>
     );
   }
@@ -41,4 +44,4 @@ const mapStateToProps = (state) => {
 //     // fetchingData: ()=> dispatch(fetchingData())
 //   }
 // }
-export default connect(mapStateToProps, { handleUpdate, handleUpdateValue })(Layout)
+export default connect(mapStateToProps, { handleUpdate, handleUpdateValue, handleDel })(Layout)
