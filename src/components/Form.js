@@ -43,8 +43,9 @@ class Form extends Component {
     });
   };
   render() {
+    const formStyle = {float:'right'}
     return (
-      <div>
+      <div style={formStyle}>
         <form
           onSubmit={e => {
             e.preventDefault();

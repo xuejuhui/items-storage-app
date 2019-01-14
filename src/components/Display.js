@@ -11,7 +11,6 @@ const Display = (props) => {
               <p>{item.description}</p>
               <button onClick={() => handleDel(item._id)}>Del</button>
               <button onClick={() => handleUpdateForm(item._id)}>Edit</button>
-              <Form/>
       </div>
     )
   }
