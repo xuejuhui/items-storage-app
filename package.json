@@ -9,13 +9,14 @@
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
-    "react-scripts": "2.0.5",
+    "react-scripts": "^2.1.3",
+    "reactstrap": "^7.0.2",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "dev": "concurrently \"npm start\" \"npm run server\"",
-    "server":"cd appback-end && nodemon app.js",
+    "server": "cd appback-end && nodemon app.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

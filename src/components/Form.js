@@ -43,9 +43,11 @@ class Form extends Component {
     });
   };
   render() {
-    const formStyle = {float:'right'}
+    // const formStyle = {float:'right'}
+    const { item } = this.state
+    const submitText = item ? "Update" : "Create"
     return (
-      <div style={formStyle}>
+      <div >
         <form
           onSubmit={e => {
             e.preventDefault();
