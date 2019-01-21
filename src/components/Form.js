@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FormGroup, ControlLabel, FormControl, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { handleSubmit } from "../actions/postsAction";
+import { handleSubmit , handleUpdate } from "../actions/postsAction";
 
 class Form extends Component {
   constructor(props) {
@@ -23,8 +23,8 @@ class Form extends Component {
     }
     return false;
   }
-  componentWillReceiveProps(nextProps){
-    this.setState({item: nextProps.editToDo});
+  componentWillReceiveProps(nextProps) {
+    nextProps.isEditing ? this.setState({ item: nextProps.editToDo }) : console.log('hi')
   }
   handleTitleChange = e => {
     this.setState({
@@ -42,24 +42,27 @@ class Form extends Component {
       }
     });
   };
+  handleFormSubmit = (submitText, id) => e => {
+    const { item } = this.state
+    e.preventDefault();
+    submitText === "Create" ? this.props.handleSubmit(item) : this.props.handleUpdate(id, item)
+    this.setState({
+      item: {
+        id: null,
+        title: "",
+        description: ""
+      }
+    });
+
+  }
   render() {
     // const formStyle = {float:'right'}
-    const { item } = this.state
-    const submitText = item ? "Update" : "Create"
+    const { item: {_id} } = this.state
+    const submitText = _id ? "Update" : "Create"
     return (
       <div >
         <form
-          onSubmit={e => {
-            e.preventDefault();
-            this.props.handleSubmit(this.state.item);
-            this.setState({
-              item: {
-                id: null,
-                title: "",
-                description: ""
-              }
-            });
-          }}
+          onSubmit={this.handleFormSubmit(submitText, _id)}
         >
           <ControlLabel>Title</ControlLabel>
           <FormControl
@@ -91,8 +94,7 @@ class Form extends Component {
 //     handleSubmit:(item)=> dispatch(handleSubmit(item))
 //   }
 // }
-function mapStateToProps(state, ownProps) {  
-  console.log(state)
+function mapStateToProps(state, ownProps) {
   return {
     editToDo: state.editToDo,
   }
@@ -100,5 +102,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
-  { handleSubmit }
+  { handleSubmit, handleUpdate }
 )(Form);

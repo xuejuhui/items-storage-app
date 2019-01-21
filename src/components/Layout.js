@@ -12,7 +12,7 @@ import {
 class Layout extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { isEditing: false, editTodo: {} };
+    this.state = { isEditing: false };
   }
   handleUpdateForm = todoId => {
     // let remainder = this.props.items.filter((item)=> item._id===todoId)[0];
@@ -39,7 +39,7 @@ class Layout extends Component {
             </div>
           );
         })}
-        <Form />
+        <Form isEditing={ isEditing }/>
       </div>
     ) : (
       <div>

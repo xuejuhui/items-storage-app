@@ -45,6 +45,15 @@ const reducer = (state=initialState, action) =>{
             ...state,
             editToDo:action.payload
         }
+        case 'HANDLE_UPDATE':
+        return{
+            ...state,
+            items: state.items.map((item)=>{
+                 if(item._id === action.payload.item._id){
+                     return item = action.payload.item
+                 }
+            })
+        }
         default:
         return newState
 

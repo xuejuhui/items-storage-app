@@ -10,6 +10,7 @@ export function handleDel (id) {
 export function handleUpdate (id, item) {
     return async dispatch =>{
         const update = await axios.put(`/api/items/${id}`,item)
+        console.log(update)
         dispatch({type:'HANDLE_UPDATE', payload:update.data})
     }
 }

@@ -26,11 +26,13 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
   let id = req.params.id;
   let updateItem = {
+    _id: id,
     title: req.body.title,
     description: req.body.description
   };
+  console.log(updateItem)
   db.Items.updateOne({ _id: id }, updateItem)
-    .then(item => res.json({ item: item }))
+    .then(item => res.json({ item: updateItem, response:item }))
     .catch(err => res.send(err));
 });
 
