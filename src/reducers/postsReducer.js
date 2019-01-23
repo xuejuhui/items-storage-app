@@ -1,61 +1,59 @@
 const initialState = {
     items: [],
-    loading:false,
+    loading: false,
     isEditing: false,
-    editToDo:{},
-  };
+    editToDo: {},
+};
 
-const reducer = (state=initialState, action) =>{
+const reducer = (state = initialState, action) => {
     const newState = {
         ...state
     };
-    switch(action.type){
+    switch (action.type) {
         case 'HANDLE_SUBMIT':
-        console.log(action.payload)
-        return{
-            ...state,
-            items: [...state.items, action.payload]
-        }
+            return {
+                ...state,
+                items: [...state.items, action.payload]
+            }
         case 'HANDLE_DEL':
-        return{
-            ...state,
-            items: state.items.filter((item)=>{
-                return item._id !== action.payload
-            })
+            return {
+                ...state,
+                items: state.items.filter((item) => {
+                    return item._id !== action.payload
+                })
 
-        }
+            }
         case 'FETCH_DATA':
-        return{
-            ...state,
-            items: action.payload,
-            loading: false
-        }
+            return {
+                ...state,
+                items: action.payload,
+                loading: false
+            }
         case 'LOADING':
-        return{
-            ...state,
-            loading:action.payload
-        }
+            return {
+                ...state,
+                loading: action.payload
+            }
         case 'EDIT':
-        return{
-            ...state,
-            isEditing:action.payload
-        }
+            return {
+                ...state,
+                isEditing: action.payload
+            }
         case 'VALUE':
-        return{
-            ...state,
-            editToDo:action.payload
-        }
+            return {
+                ...state,
+                editToDo: action.payload
+            }
         case 'HANDLE_UPDATE':
-        return{
-            ...state,
-            items: state.items.map((item)=>{
-                 if(item._id === action.payload.item._id){
-                     return item = action.payload.item
-                 }
-            })
-        }
+            return {
+                ...state,
+                items: state.items.map((item) => {
+                    return item._id === action.payload.item._id ? item = action.payload.item : item
+                }
+                )
+            }
         default:
-        return newState
+            return newState
 
     }
 

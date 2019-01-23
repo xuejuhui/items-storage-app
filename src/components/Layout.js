@@ -6,7 +6,8 @@ import Display from "./Display.js";
 import {
   handleUpdate,
   handleUpdateValue,
-  handleDel
+  handleDel,
+  handleUpdateForm
 } from "../actions/postsAction";
 
 class Layout extends Component {
@@ -14,15 +15,17 @@ class Layout extends Component {
     super(props, context);
     this.state = { isEditing: false };
   }
-  handleUpdateForm = todoId => {
-    // let remainder = this.props.items.filter((item)=> item._id===todoId)[0];
-    this.setState({ isEditing: !this.state.isEditing });
-    this.props.handleUpdateValue(todoId);
-  };
+  // handleUpdateForm = todoId => {
+  //   // let remainder = this.props.items.filter((item)=> item._id===todoId)[0];
+  //   this.setState({ isEditing: !this.state.isEditing });
+  //   this.props.handleUpdateValue(todoId);
+  // };
+
+
   render() {
-    const { isEditing } = this.state;
-    const { items } = this.props;
-    console.log(isEditing);
+    const { isEditing } = this.props;
+    const { items, handleDel } = this.props;
+    console.log(this.props.handleUpdateForm);
     return isEditing ? (
       <div>
         <NavBar />
@@ -31,11 +34,12 @@ class Layout extends Component {
           return (
             <div key={item._id}>
               <Display
-                handleUpdateForm={this.handleUpdateForm}
-                isEditing={this.state.isEditing}
-                handleDel={this.props.handleDel}
+                handleUpdateForm={this.props.handleUpdateForm}
+                isEditing={isEditing}
+                handleDel={handleDel}
                 item={item}
               />
+                            <button onClick={()=> this.props.handleUpdateForm(!isEditing) }>sjdkal</button>
             </div>
           );
         })}
@@ -54,6 +58,7 @@ class Layout extends Component {
                 handleDel={this.props.handleDel}
                 item={item}
               />
+              <button onClick={()=> this.props.handleUpdateForm(!isEditing) }>sjdkal</button>
             </div>
           );
         })}
@@ -65,7 +70,8 @@ class Layout extends Component {
 const mapStateToProps = state => {
   return {
     items: state.items,
-    loading: state.loading
+    loading: state.loading,
+    isEditing: state.isEditing,
   };
 };
 
@@ -77,5 +83,5 @@ const mapStateToProps = state => {
 // }
 export default connect(
   mapStateToProps,
-  { handleUpdate, handleUpdateValue, handleDel }
+  { handleUpdate, handleUpdateValue, handleDel, handleUpdateForm }
 )(Layout);

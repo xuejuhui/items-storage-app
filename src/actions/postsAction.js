@@ -41,6 +41,7 @@ export function handleUpdateForm (isEdit) {
         dispatch({type:'EDIT', payload:isEdit})
     }
 }
+
 export function handleUpdateValue (toDoId) {
     return async dispatch =>{
         const item = await axios.get('/api/items')

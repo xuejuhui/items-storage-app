@@ -1,10 +1,11 @@
 import React from 'react'
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
-import Form from "./Form.js";
 
 
-const Display = ({ item, loading, handleUpdateForm, handleDel, isEditing }) => {
+
+const Display = ({ item, loading, handleUpdateForm, handleDel }) => {
+  console.log(handleUpdateForm,handleDel)
   const cardStyle = {width:'30%',height:'60%', borderStyle:'solid',marginBottom : "20px"}
     return (
       <div style={cardStyle}>
@@ -15,7 +16,7 @@ const Display = ({ item, loading, handleUpdateForm, handleDel, isEditing }) => {
             <CardSubtitle>Card subtitle</CardSubtitle>
             <CardText>{item.description}</CardText>
             <Button onClick={() => handleDel(item._id)}>Del</Button>
-            <Button onClick={() => handleUpdateForm(item._id)}>Edit</Button>
+            <Button onClick={() => handleUpdateForm()}>Edit</Button>
           </CardBody>
         </Card>
       </div>
