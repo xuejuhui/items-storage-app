@@ -69,9 +69,9 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
   return {
-    items: state.items,
-    loading: state.loading,
-    isEditing: state.isEditing,
+    items: state.post.items,
+    loading: state.post.loading,
+    isEditing: state.post.isEditing,
   };
 };
 

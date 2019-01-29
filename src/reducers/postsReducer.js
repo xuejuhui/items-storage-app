@@ -5,7 +5,7 @@ const initialState = {
     editToDo: {},
 };
 
-const reducer = (state = initialState, action) => {
+const postsReducer = (state = initialState, action) => {
     const newState = {
         ...state
     };
@@ -61,4 +61,4 @@ const reducer = (state = initialState, action) => {
 
 }
 
-export default reducer
+export default postsReducer
